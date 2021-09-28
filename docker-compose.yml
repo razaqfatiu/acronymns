@@ -1,0 +1,26 @@
+version: '3.4'
+
+services:
+  acronymns:
+    image: acronymns
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+    ports:
+      - 8001:8001
+    volumes:
+      - .:/app
+    links:
+      - mongodb
+
+  mongodb: 
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    volumes:
+      - data:/data/db
+
+volumes:
+  data
