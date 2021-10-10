@@ -1,12 +1,16 @@
-FROM node:16
+FROM node:14
+
+RUN mkdir -p /app && chown -R node:node /app
 
 WORKDIR /app
 
-COPY package*.json config ./
+COPY package*.json config acronyms.json .babelrc ./
+
+USER node
 
 RUN npm install
 
-COPY . .
+COPY --chown=node:node . .
 
 ENV PORT=8001
 
